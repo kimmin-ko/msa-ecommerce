@@ -1,9 +1,11 @@
 package com.tme.userservice
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.boot.runApplication
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient
 
+@ConfigurationPropertiesScan
 @EnableEurekaClient
 @SpringBootApplication
 class UserServiceApplication

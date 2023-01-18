@@ -26,19 +26,21 @@ extra["springCloudVersion"] = "2021.0.5"
 dependencies {
     // spring
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
     // spring cloud
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+
+    // h2
+    runtimeOnly("com.h2database:h2")
 
     // kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
-    // lombok
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
 
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
