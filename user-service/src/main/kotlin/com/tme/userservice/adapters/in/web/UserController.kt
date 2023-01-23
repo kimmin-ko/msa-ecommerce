@@ -1,35 +1,23 @@
 package com.tme.userservice.adapters.`in`.web
 
-import com.tme.userservice.properties.Greeting
-import com.tme.userservice.util.logger
-import org.slf4j.Logger
-import org.springframework.web.bind.annotation.GetMapping
+import com.tme.userservice.adapters.`in`.web.converter.toJoinUserDto
+import com.tme.userservice.adapters.`in`.web.dto.UserJoinRequest
+import com.tme.userservice.application.service.UserJoinService
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-@RequestMapping("/users")
+@RequestMapping
 @RestController
 class UserController(
-    val greeting: Greeting
+    private val userJoinService: UserJoinService
 ) {
 
-    private val log: Logger = logger()
-
-//    @PostMapping
-//    fun createUser(@RequestBody req: RequestUser): String {
-//
-//    }
-
-    @GetMapping("/health-check")
-    fun status(): String {
-        log.info("health-check")
-        return "It's working in user service."
+    @PostMapping("/users")
+    fun createUser(@RequestBody req: UserJoinRequest): String {
+        userJoinService.join(toJoinUserDto(req))
+        return "Create user method is called."
     }
 
-    @GetMapping("/welcome")
-    fun welcome(): String {
-        return greeting.message
-    }
 }
