@@ -23,6 +23,11 @@ class User(
         this.name = name
     }
 
+    fun changePassword(password: String) {
+        checkPassword(password)
+        this.password = password
+    }
+
     // check //
     private fun checkName(name: String) {
         if (name.isBlank()) {
