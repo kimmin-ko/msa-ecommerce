@@ -1,4 +1,6 @@
-package com.tme.userservice.errors
+package com.tme.userservice.errors.exceptions
+
+import com.tme.userservice.errors.ErrorCode
 
 class NotFoundException(
     errorMessage: String

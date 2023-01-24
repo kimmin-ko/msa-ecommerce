@@ -11,3 +11,13 @@ fun toEntity(user: User): UserEntity {
         password = user.password
     )
 }
+
+fun toUser(userEntity: UserEntity): User {
+    return User(
+        email = userEntity.email,
+        name = userEntity.name,
+        password = userEntity.password,
+        userId = userEntity.userId,
+        id = userEntity.id
+    )
+}
