@@ -45,7 +45,7 @@ dependencies {
     ///// spring cloud /////
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
-    ///// h2 (1.3.176 버전 사용해야 서버 로드 시 데이터베이스 자동 생성) /////
+    ///// h2 (1.3.176 or 1.4.200 버전 사용해야 서버 로드 시 데이터베이스 자동 생성) /////
     runtimeOnly("com.h2database:h2:1.4.200")
 
     ///// kotlin /////
@@ -64,9 +64,6 @@ dependencies {
     kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
     kapt("org.springframework.boot:spring-boot-configuration-processor")
     implementation ("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0")
-
-    ///// modelmapper /////
-    implementation("org.modelmapper:modelmapper:3.1.1")
 
     ///// test /////
     testImplementation("org.springframework.boot:spring-boot-starter-test")
