@@ -1,0 +1,15 @@
+spring.config.activate.on-profile: local
+
+spring:
+  jpa:
+    database: h2
+    show-sql: false
+    open-in-view: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: false
+        dialect: org.hibernate.dialect.H2Dialect
+        default_batch_fetch_size: 500

@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: order-service
+  config:
+    import:
+      - application-db.yml
+      - application-jpa.yml
+      - application-cloud.yml
+
+server:
+  port: 0
