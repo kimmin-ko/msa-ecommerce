@@ -1,6 +1,6 @@
 package com.tme.orderservice.domain.order
 
-import com.tme.orderservice.domain.order.converter.toCreateOrderResult
+import com.tme.orderservice.domain.order.converter.entityToCreateOrderResult
 import com.tme.orderservice.domain.order.dto.service.CreateOrderCommand
 import com.tme.orderservice.domain.order.dto.service.CreateOrderResult
 import org.springframework.stereotype.Service
@@ -21,7 +21,7 @@ class OrderService(
         )
 
         val savedOrder = repository.save(order)
-        return toCreateOrderResult(savedOrder)
+        return entityToCreateOrderResult(savedOrder)
     }
 
 }

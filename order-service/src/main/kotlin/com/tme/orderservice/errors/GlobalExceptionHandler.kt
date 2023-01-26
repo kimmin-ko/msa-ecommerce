@@ -16,4 +16,10 @@ class GlobalExceptionHandler {
         return ErrorResponse(e.errorCode.code, e.errorMessage)
     }
 
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun illegalArgument(e: IllegalArgumentException): ErrorResponse {
+        val errorCode = ErrorCode.INVALID_PARAMETER
+        return ErrorResponse(errorCode.code, e.message ?: errorCode.defaultMessage)
+    }
+
 }
