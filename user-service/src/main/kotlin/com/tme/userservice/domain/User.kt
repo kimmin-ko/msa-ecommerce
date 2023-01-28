@@ -28,7 +28,24 @@ class User(
         this.password = password
     }
 
-    // check //
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is User) return false
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
+
+    override fun toString(): String {
+        return "User(email='$email', name='$name', password='$password', userId='$userId', id=$id)"
+    }
+
+    // private //
     private fun verifyName(name: String) {
         if (name.isBlank()) {
             throw IllegalArgumentException("Name must not be empty.")
@@ -47,23 +64,6 @@ class User(
         } else if (!email.contains("@")) {
             throw IllegalArgumentException("Email must contain '@' characters.")
         }
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is User) return false
-
-        if (id != other.id) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return id.hashCode()
-    }
-
-    override fun toString(): String {
-        return "User(id=$id, email='$email', name='$name', password='$password', userId='$userId')"
     }
 
 }

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 @RestControllerAdvice
 class GlobalExceptionHandler {
 
-    private val log: Logger = logger()
-
     @ExceptionHandler(BusinessException::class)
     fun business(e: BusinessException): ErrorResponse {
         return ErrorResponse(e.errorCode.code, e.errorMessage)

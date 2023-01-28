@@ -3,11 +3,11 @@ package com.tme.userservice.adapters.`in`.web.converter
 import com.tme.userservice.adapters.`in`.web.dto.UserJoinRequest
 import com.tme.userservice.adapters.`in`.web.dto.UserJoinResponse
 import com.tme.userservice.adapters.`in`.web.dto.UserResponse
-import com.tme.userservice.application.dto.JoinUserDto
+import com.tme.userservice.application.dto.UserJoinCommand
 import com.tme.userservice.domain.User
 
-fun toJoinUserDto(request: UserJoinRequest): JoinUserDto {
-    return JoinUserDto(
+fun toJoinUserDto(request: UserJoinRequest): UserJoinCommand {
+    return UserJoinCommand(
         request.email,
         request.name,
         request.password

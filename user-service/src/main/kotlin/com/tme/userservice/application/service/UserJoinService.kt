@@ -1,7 +1,7 @@
 package com.tme.userservice.application.service
 
 import com.tme.userservice.application.converter.toUser
-import com.tme.userservice.application.dto.JoinUserDto
+import com.tme.userservice.application.dto.UserJoinCommand
 import com.tme.userservice.application.port.`in`.UserJoinUseCase
 import com.tme.userservice.application.port.out.UserJoinPort
 import com.tme.userservice.domain.User
@@ -16,10 +16,9 @@ class UserJoinService(
     private val userJoinPort: UserJoinPort
 ) : UserJoinUseCase {
 
-    override fun join(joinUserDto: JoinUserDto): User {
-        val user = toUser(joinUserDto)
+    override fun join(command: UserJoinCommand): User {
+        val user = toUser(command)
         user.changePassword(passwordEncoder.encode(user.password))
-        userJoinPort.save(user)
-        return user
+        return userJoinPort.save(user)
     }
 }

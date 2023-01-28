@@ -1,14 +1,12 @@
 package com.tme.userservice.adapters.`in`.web
 
-import com.tme.userservice.properties.JwtProps
 import org.springframework.core.env.Environment
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class CommonController(
-    private val env: Environment,
-    private val jwtProps: JwtProps
+    private val env: Environment
 ) {
 
     @GetMapping("/health-check")
