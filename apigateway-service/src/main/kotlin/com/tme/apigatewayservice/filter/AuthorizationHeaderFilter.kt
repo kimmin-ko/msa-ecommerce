@@ -21,20 +21,18 @@ class AuthorizationHeaderFilter(
     private val log: Logger = logger()
 
     override fun apply(config: Config?): GatewayFilter {
-        return GatewayFilter { exchange, chain ->
+        return GatewayFilter filter@{ exchange, chain ->
             val request: ServerHttpRequest = exchange.request
 
-            if (request.headers.containsKey(HttpHeaders.AUTHORIZATION)) {
-                onError(exchange, "No authorization header.", HttpStatus.UNAUTHORIZED)
+            if (!request.headers.containsKey(HttpHeaders.AUTHORIZATION)) {
+                return@filter onError(exchange, "No authorization header.", HttpStatus.UNAUTHORIZED)
             }
 
             val authorizationHeader = request.headers[HttpHeaders.AUTHORIZATION]!![0]
-            log.debug("authorization header: $authorizationHeader")
             val jwt = authorizationHeader.replace("Bearer", "")
-            log.debug("jwt: $jwt")
 
             if (!isJwtValid(jwt)) {
-                onError(exchange, "Jwt is not valid.", HttpStatus.UNAUTHORIZED)
+                return@filter onError(exchange, "Jwt is not valid.", HttpStatus.UNAUTHORIZED)
             }
 
             chain.filter(exchange)
@@ -43,14 +41,20 @@ class AuthorizationHeaderFilter(
 
     private fun isJwtValid(jwt: String): Boolean {
         return try {
-            val userId = Jwts.parser()
+            val subject = Jwts.parser()
                 .setSigningKey(jwtProps.secret)
-                .parseClaimsJwt(jwt).body
+                .parseClaimsJws(jwt).body
                 .subject
+
+            if (subject == null || subject.isBlank()) {
+                log.error("Subject must not be null.")
+                return false
+            }
+
             true
         } catch (e: Exception) {
             log.error(e.message)
-            false;
+            false
         }
     }
 
@@ -62,8 +66,6 @@ class AuthorizationHeaderFilter(
         return response.setComplete()
     }
 
-    class Config {
-
-    }
+    class Config
 
 }

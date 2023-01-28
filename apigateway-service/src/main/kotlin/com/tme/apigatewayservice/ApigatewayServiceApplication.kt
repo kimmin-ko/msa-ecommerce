@@ -2,7 +2,6 @@ package com.tme.apigatewayservice
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
-import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 
 @ConfigurationPropertiesScan
@@ -10,5 +9,5 @@ import org.springframework.boot.runApplication
 class ApigatewayServiceApplication
 
 fun main(args: Array<String>) {
-	runApplication<ApigatewayServiceApplication>(*args)
+    runApplication<ApigatewayServiceApplication>(*args)
 }
