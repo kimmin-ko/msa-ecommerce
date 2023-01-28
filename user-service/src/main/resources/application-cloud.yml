@@ -1,5 +1,6 @@
 spring.config.activate.on-profile: local
 
+### eureka ###
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
@@ -8,3 +9,10 @@ eureka:
     fetch-registry: true
     service-url:
       default-zone: http://127.0.0.1:8761/eureka
+
+### actuator ###
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans

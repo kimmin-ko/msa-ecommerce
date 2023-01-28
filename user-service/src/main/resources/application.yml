@@ -6,10 +6,7 @@ spring:
       - application-db.yml
       - application-jpa.yml
       - application-cloud.yml
-      - application-security.yml
+      - classpath:/bootstrap.yml # *classpath:
 
 server:
   port: 0
-
-greeting:
-  message: Welcome to the simple e-commerce

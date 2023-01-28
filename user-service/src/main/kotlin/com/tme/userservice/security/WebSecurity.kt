@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 
@@ -17,27 +16,17 @@ import org.springframework.security.web.SecurityFilterChain
 class WebSecurity(
     private val jwtProps: JwtProps,
     private val authenticationConfiguration: AuthenticationConfiguration,
-    private val userDetailsService: DefaultUserDetailsService,
     private val userLoadUseCase: UserLoadUseCase
 ) {
-
-    @Bean
-    fun webSecurityCustomizer(): WebSecurityCustomizer {
-        return WebSecurityCustomizer {
-            it.ignoring().antMatchers(
-                "/ignore1",
-                "/ignore2"
-            )
-        }
-    }
 
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf().disable()
 
         // 인가
-        http.authorizeRequests().antMatchers("/**")
-            .permitAll()
+        http.authorizeRequests()
+            .antMatchers("/**").permitAll()
+            .antMatchers("/actuator/**").permitAll()
             .and()
             .addFilter(getAuthenticationFilter())
 

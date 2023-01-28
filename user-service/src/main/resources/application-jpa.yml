@@ -13,3 +13,7 @@ spring:
         format_sql: false
         dialect: org.hibernate.dialect.H2Dialect
         default_batch_fetch_size: 500
+
+decorator:
+  datasource:
+    enabled: false

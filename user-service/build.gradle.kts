@@ -39,11 +39,14 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
     ///// spring cloud /////
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+    implementation("org.springframework.cloud:spring-cloud-starter-config")
+    implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
 
     ///// h2 (1.3.176 or 1.4.200 버전 사용해야 서버 로드 시 데이터베이스 자동 생성) /////
     runtimeOnly("com.h2database:h2:1.4.200")
@@ -66,7 +69,7 @@ dependencies {
     implementation("com.querydsl:querydsl-jpa:5.0.0")
     kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
     kapt("org.springframework.boot:spring-boot-configuration-processor")
-    implementation ("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0")
+    implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0")
 
     ///// test /////
     testImplementation("org.springframework.boot:spring-boot-starter-test")

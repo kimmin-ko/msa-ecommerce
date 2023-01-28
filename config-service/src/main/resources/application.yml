@@ -1,0 +1,10 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///Users/kimmin/Desktop/study-repository/toy-msa-ecommerce/git-local-repo
