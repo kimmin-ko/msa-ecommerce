@@ -9,7 +9,7 @@ class CommonController(
     private val env: Environment
 ) {
 
-    @GetMapping("/user-service/health-check")
+    @GetMapping("/health-check")
     fun status(): String {
         return "It's working in user service on port ${env.getProperty("local.server.port")}"
     }

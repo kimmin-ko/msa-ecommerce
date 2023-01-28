@@ -8,16 +8,21 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class UserLoadAdapter(
-    private val userRepository: UserRepository
+    private val repository: UserRepository
 ) : UserLoadPort {
 
     override fun findByUserId(userId: String): User? {
-        val userEntity = userRepository.findByUserId(userId) ?: return null
+        val userEntity = repository.findByUserId(userId) ?: return null
+        return toUser(userEntity)
+    }
+
+    override fun findByEmail(email: String): User? {
+        val userEntity = repository.findByEmail(email) ?: return null
         return toUser(userEntity)
     }
 
     override fun findAll(): List<User> {
-        return userRepository.findAll().map { userEntity -> toUser(userEntity) }
+        return repository.findAll().map { userEntity -> toUser(userEntity) }
     }
 
 }

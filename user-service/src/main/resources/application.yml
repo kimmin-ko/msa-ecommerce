@@ -6,6 +6,7 @@ spring:
       - application-db.yml
       - application-jpa.yml
       - application-cloud.yml
+      - application-security.yml
 
 server:
   port: 0

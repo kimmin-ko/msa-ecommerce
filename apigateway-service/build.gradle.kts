@@ -28,9 +28,15 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
+	// spring
+	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
 	// spring cloud
 	implementation("org.springframework.cloud:spring-cloud-starter-gateway")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+
+	// jwt
+	implementation("io.jsonwebtoken:jjwt:0.9.1")
 
 	// lombok
 	compileOnly("org.projectlombok:lombok")

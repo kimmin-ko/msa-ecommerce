@@ -10,4 +10,8 @@ interface UserLoadUseCase {
 
     fun findAll(): List<User>
 
+    fun findByEmail(email: String): User?
+
+    fun getByEmail(email: String): User
+
 }

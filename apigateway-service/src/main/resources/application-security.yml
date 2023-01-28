@@ -1,0 +1,4 @@
+spring.config.activate.on-profile: local
+
+token:
+  secret: user-token

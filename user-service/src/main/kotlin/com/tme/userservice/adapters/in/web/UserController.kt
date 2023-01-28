@@ -12,7 +12,7 @@ import com.tme.userservice.application.port.`in`.UserLoadUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
-@RequestMapping("/user-service")
+@RequestMapping
 @RestController
 class UserController(
     private val userJoinUseCase: UserJoinUseCase,

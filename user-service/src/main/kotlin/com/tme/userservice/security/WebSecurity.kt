@@ -1,20 +1,45 @@
 package com.tme.userservice.security
 
+import com.tme.userservice.application.port.`in`.UserLoadUseCase
+import com.tme.userservice.properties.JwtProps
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 
 @EnableWebSecurity
 @Configuration
-class WebSecurity {
+class WebSecurity(
+    private val jwtProps: JwtProps,
+    private val authenticationConfiguration: AuthenticationConfiguration,
+    private val userDetailsService: DefaultUserDetailsService,
+    private val userLoadUseCase: UserLoadUseCase
+) {
+
+    @Bean
+    fun webSecurityCustomizer(): WebSecurityCustomizer {
+        return WebSecurityCustomizer {
+            it.ignoring().antMatchers(
+                "/ignore1",
+                "/ignore2"
+            )
+        }
+    }
 
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf().disable()
-        http.authorizeRequests().antMatchers("/users/**").permitAll()
+
+        // 인가
+        http.authorizeRequests().antMatchers("/**")
+            .permitAll()
+            .and()
+            .addFilter(getAuthenticationFilter())
 
         // h2-console 화면을 보기 위한 설정
         http.headers().frameOptions().disable()
@@ -22,7 +47,18 @@ class WebSecurity {
     }
 
     @Bean
-    fun passwordEncoder(): BCryptPasswordEncoder{
+    fun passwordEncoder(): BCryptPasswordEncoder {
         return BCryptPasswordEncoder()
+    }
+
+    @Bean
+    fun authenticationManager(): AuthenticationManager {
+        return authenticationConfiguration.authenticationManager
+    }
+
+    private fun getAuthenticationFilter(): AuthenticationFilter {
+        val authenticationFilter = AuthenticationFilter(userLoadUseCase, jwtProps)
+        authenticationFilter.setAuthenticationManager(authenticationManager())
+        return authenticationFilter
     }
 }

@@ -48,6 +48,9 @@ dependencies {
     ///// h2 (1.3.176 or 1.4.200 버전 사용해야 서버 로드 시 데이터베이스 자동 생성) /////
     runtimeOnly("com.h2database:h2:1.4.200")
 
+    ///// jwt /////
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
+
     ///// kotlin /////
     // 1. 기존 jackson 라이브러리는 class를 deserialize 시 기본 생성자가 필요
     // 2. data class는 all args 생성자만 만들어주기 때문에 deserialize 시 에러 발생

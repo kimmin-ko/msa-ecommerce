@@ -8,4 +8,6 @@ interface UserLoadPort {
 
     fun findAll(): List<User>
 
+    fun findByEmail(email: String): User?
+
 }

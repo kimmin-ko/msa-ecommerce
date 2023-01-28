@@ -12,36 +12,36 @@ class User(
 ) {
 
     init {
-        checkEmail(email)
-        checkName(name)
-        checkPassword(password)
+        verifyEmail(email)
+        verifyName(name)
+        verifyPassword(password)
     }
 
     // change //
     fun changeName(name: String) {
-        checkName(name)
+        verifyName(name)
         this.name = name
     }
 
     fun changePassword(password: String) {
-        checkPassword(password)
+        verifyPassword(password)
         this.password = password
     }
 
     // check //
-    private fun checkName(name: String) {
+    private fun verifyName(name: String) {
         if (name.isBlank()) {
             throw IllegalArgumentException("Name must not be empty.")
         }
     }
 
-    private fun checkPassword(password: String) {
+    private fun verifyPassword(password: String) {
         if (password.isBlank()) {
             throw IllegalArgumentException("Password must not be empty.")
         }
     }
 
-    private fun checkEmail(email: String) {
+    private fun verifyEmail(email: String) {
         if (email.length < 5) {
             throw IllegalArgumentException("Email not be less than 5 characters.")
         } else if (!email.contains("@")) {
