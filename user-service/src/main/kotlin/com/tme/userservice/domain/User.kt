@@ -1,6 +1,5 @@
 package com.tme.userservice.domain
 
-import java.lang.IllegalArgumentException
 import java.util.*
 
 class User(
@@ -8,13 +7,24 @@ class User(
     var name: String,
     var password: String,
     val userId: String = UUID.randomUUID().toString(),
-    var id: Long? = null,
+    var id: Long? = null
 ) {
 
     init {
         verifyEmail(email)
         verifyName(name)
         verifyPassword(password)
+    }
+
+    companion object {
+        @JvmStatic
+        fun fixture(email: String, name: String, password: String): User {
+            return User(
+                email = email,
+                name = name,
+                password = password
+            )
+        }
     }
 
     // change //
@@ -65,5 +75,4 @@ class User(
             throw IllegalArgumentException("Email must contain '@' characters.")
         }
     }
-
 }
