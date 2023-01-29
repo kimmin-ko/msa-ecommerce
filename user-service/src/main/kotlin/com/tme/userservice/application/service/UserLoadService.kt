@@ -29,10 +29,8 @@ class UserLoadService(
         return findByEmail(email) ?: notFound(User::class.java)
     }
 
-    @Deprecated("refactor pagination")
+    // TODO: refactor pagination
     override fun findAll(): List<User> {
         return userLoadPort.findAll()
     }
-
-
 }

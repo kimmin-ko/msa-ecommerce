@@ -4,9 +4,10 @@ import com.tme.productservice.common.entity.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Getter
-@ToString(exclude = {})
+@ToString
 @EqualsAndHashCode(of = "id", callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "product")
@@ -30,8 +31,17 @@ public class Product extends BaseTimeEntity {
     private Integer unitPrice;
 
     // constructor //
+    private Product(String productName, Integer stock, Integer unitPrice) {
+        this.productId = UUID.randomUUID().toString();
+        this.productName = verifyProductName(productName);
+        this.stock = verifyStock(stock);
+        this.unitPrice = verifyUnitPrice(unitPrice);
+    }
 
     // static factory method //
+    public static Product fixture(String productName, Integer stock, Integer unitPrice) {
+        return new Product(productName, stock, unitPrice);
+    }
 
     // associate //
 
