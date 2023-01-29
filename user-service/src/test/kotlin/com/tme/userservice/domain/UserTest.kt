@@ -40,7 +40,7 @@ class UserTest {
         ],
         delimiter = ':'
     )
-    @DisplayName("이메일은 5글자 이상이어야 하며 '@'가 포함되어야 합니다.")
+    @DisplayName("이메일은 5글자 이상이어야 하며 '@'가 포함되어야 한다.")
     fun invalid_email_test(invalidEmail: String, errorMessage: String) {
         // given
         val name = "min"
@@ -59,7 +59,7 @@ class UserTest {
 
     @ParameterizedTest
     @CsvSource(value = ["''", "' '"])
-    @DisplayName("암호화된 비밀번호는 1글자 이상이어야 합니다. ")
+    @DisplayName("암호화된 비밀번호는 1글자 이상이어야 한다. ")
     fun invalid_password_test(invalidPassword: String) {
         // given
         val email = "min@naver.com"
@@ -78,7 +78,7 @@ class UserTest {
 
     @ParameterizedTest
     @CsvSource(value = ["''", "' '"])
-    @DisplayName("회원 이름은 1글자 이상이어야 합니다. ")
+    @DisplayName("회원 이름은 1글자 이상이어야 한다. ")
     fun invalid_name_test(invalidName: String) {
         // given
         val email = "min@naver.com"

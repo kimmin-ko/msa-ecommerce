@@ -2,6 +2,7 @@ package com.tme.productservice.domain.product;
 
 import com.tme.productservice.common.entity.BaseTimeEntity;
 import lombok.*;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -25,21 +26,25 @@ public class Product extends BaseTimeEntity {
     private String productName;
 
     @Column(nullable = false)
-    private Integer stock;
+    private int stock;
 
     @Column(nullable = false)
-    private Integer unitPrice;
+    private int unitPrice;
 
     // constructor //
-    private Product(String productName, Integer stock, Integer unitPrice) {
+    public Product(String productName, int stock, int unitPrice) {
+        verifyProductName(productName);
+        verifyStock(stock);
+        verifyUnitPrice(unitPrice);
+
         this.productId = UUID.randomUUID().toString();
-        this.productName = verifyProductName(productName);
-        this.stock = verifyStock(stock);
-        this.unitPrice = verifyUnitPrice(unitPrice);
+        this.productName = productName;
+        this.stock = stock;
+        this.unitPrice = unitPrice;
     }
 
     // static factory method //
-    public static Product fixture(String productName, Integer stock, Integer unitPrice) {
+    public static Product fixture(String productName, int stock, int unitPrice) {
         return new Product(productName, stock, unitPrice);
     }
 
@@ -52,6 +57,24 @@ public class Product extends BaseTimeEntity {
     // functional //
 
     // private //
+    private void verifyUnitPrice(int unitPrice) {
+        if (unitPrice < 0) {
+            throw new IllegalArgumentException("Product unit price must be equal or grater than 1.");
+        }
+    }
 
+    private void verifyStock(int stock) {
+        if (stock < 0) {
+            throw new IllegalArgumentException("Product stock must be equal or grater than 1.");
+        }
+    }
+
+    private void verifyProductName(String productName) {
+        Assert.notNull(productName, "Product name must not be null.");
+
+        if (productName.isBlank()) {
+            throw new IllegalArgumentException("Product name must not be empty.");
+        }
+    }
 
 }
